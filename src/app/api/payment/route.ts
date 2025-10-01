@@ -2,6 +2,18 @@ import { NextRequest, NextResponse } from 'next/server'
 import { MercadoPagoConfig, Payment } from 'mercadopago'
 import { prisma } from '@/lib/prisma'
 
+interface MercadoPagoResponse {
+  id?: number
+  status?: string
+  status_detail?: string
+  point_of_interaction?: {
+    transaction_data?: {
+      qr_code_base64?: string
+      qr_code?: string
+    }
+  }
+}
+
 const client = new MercadoPagoConfig({
   accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN!,
 })
@@ -54,7 +66,7 @@ export async function POST(request: NextRequest) {
 
     // Processar pagamento real com Mercado Pago
     const payment = new Payment(client)
-    let response: any
+    let response: MercadoPagoResponse
 
     if (paymentMethod === 'pix') {
       // PIX: Criar pagamento PIX real
@@ -77,13 +89,13 @@ export async function POST(request: NextRequest) {
         }
 
         console.log('📤 Enviando dados PIX para MP:', paymentData)
-        response = await payment.create({ body: paymentData }) as any
+        response = await payment.create({ body: paymentData }) as MercadoPagoResponse
         console.log('📥 Resposta PIX do MP:', response)
 
         return NextResponse.json({
           success: true,
           paymentMethod: 'pix',
-          paymentId: response.id,
+          paymentId: response.id?.toString(),
           status: response.status,
           statusDetail: response.status_detail,
           qrCode: response.point_of_interaction?.transaction_data?.qr_code_base64,
@@ -95,7 +107,7 @@ export async function POST(request: NextRequest) {
             telefone,
             acompanhantes,
             valorTotal,
-            mercadoPagoId: response.id
+            mercadoPagoId: response.id?.toString()
           }
         })
       } catch (error: unknown) {
@@ -136,7 +148,7 @@ export async function POST(request: NextRequest) {
         }
 
         console.log('📤 Enviando dados cartão para MP:', paymentData)
-        response = await payment.create({ body: paymentData }) as any
+        response = await payment.create({ body: paymentData }) as MercadoPagoResponse
         console.log('📥 Resposta cartão do MP:', response)
 
         // Só salvar no banco se o pagamento foi APROVADO
@@ -159,7 +171,7 @@ export async function POST(request: NextRequest) {
               userId: user.id,
               valor: valorTotal,
               status: 'APROVADO',
-              mercadoPagoId: response.id?.toString(),
+              mercadoPagoId: response.id?.toString()?.toString(),
               mercadoPagoStatus: response.status,
               acompanhantes: acompanhantes.map((acomp: {nome: string}) => acomp.nome).filter((nome: string) => nome.trim() !== '')
             }
@@ -167,7 +179,7 @@ export async function POST(request: NextRequest) {
 
           return NextResponse.json({
             success: true,
-            paymentId: response.id,
+            paymentId: response.id?.toString(),
             status: response.status,
             statusDetail: response.status_detail,
             userId: user.id
@@ -177,7 +189,7 @@ export async function POST(request: NextRequest) {
 
           return NextResponse.json({
             success: false,
-            paymentId: response.id,
+            paymentId: response.id?.toString(),
             status: response.status,
             statusDetail: response.status_detail,
             error: `Pagamento rejeitado: ${response.status_detail}`

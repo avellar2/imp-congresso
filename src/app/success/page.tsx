@@ -3,8 +3,9 @@
 import { useSearchParams } from 'next/navigation'
 import { CheckCircle } from 'lucide-react'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
-export default function Success() {
+function SuccessContent() {
   const searchParams = useSearchParams()
   const userId = searchParams.get('userId')
 
@@ -36,5 +37,13 @@ export default function Success() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function Success() {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <SuccessContent />
+    </Suspense>
   )
 }

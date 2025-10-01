@@ -3,8 +3,9 @@
 import { useSearchParams } from 'next/navigation'
 import { Clock } from 'lucide-react'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
-export default function Pending() {
+function PendingContent() {
   const searchParams = useSearchParams()
   const userId = searchParams.get('userId')
 
@@ -36,5 +37,13 @@ export default function Pending() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function Pending() {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <PendingContent />
+    </Suspense>
   )
 }
