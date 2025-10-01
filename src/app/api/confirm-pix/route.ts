@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     // Extrair nomes dos acompanhantes
     const nomesAcompanhantes = acompanhantes
-      .map((acomp: any) => acomp.nome)
+      .map((acomp: {nome: string}) => acomp.nome)
       .filter((nome: string) => nome && nome.trim() !== '')
 
     // Criar registro de pagamento aprovado
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
       totalPessoas: 1 + nomesAcompanhantes.length
     })
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Erro ao confirmar pagamento PIX:', error)
 
     if (error.code === 'P2002') {

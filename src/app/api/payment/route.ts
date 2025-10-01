@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
 
     // Processar pagamento real com Mercado Pago
     const payment = new Payment(client)
-    let response: any
+    let response: unknown
 
     if (paymentMethod === 'pix') {
       // PIX: Criar pagamento PIX real
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
         }
 
         console.log('📤 Enviando dados PIX para MP:', paymentData)
-        response = await payment.create({ body: paymentData })
+        response = await payment.create({ body: paymentData }) as any
         console.log('📥 Resposta PIX do MP:', response)
 
         return NextResponse.json({
@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
             mercadoPagoId: response.id
           }
         })
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error('❌ Erro ao criar pagamento PIX:', error)
         return NextResponse.json(
           { error: 'Erro ao processar pagamento PIX', details: error.message },
@@ -136,7 +136,7 @@ export async function POST(request: NextRequest) {
         }
 
         console.log('📤 Enviando dados cartão para MP:', paymentData)
-        response = await payment.create({ body: paymentData })
+        response = await payment.create({ body: paymentData }) as any
         console.log('📥 Resposta cartão do MP:', response)
 
         // Só salvar no banco se o pagamento foi APROVADO
@@ -154,14 +154,14 @@ export async function POST(request: NextRequest) {
           })
 
           // Criar registro de pagamento aprovado
-          const pagamento = await prisma.pagamento.create({
+          await prisma.pagamento.create({
             data: {
               userId: user.id,
               valor: valorTotal,
               status: 'APROVADO',
               mercadoPagoId: response.id?.toString(),
               mercadoPagoStatus: response.status,
-              acompanhantes: acompanhantes.map((acomp: any) => acomp.nome).filter((nome: string) => nome.trim() !== '')
+              acompanhantes: acompanhantes.map((acomp: {nome: string}) => acomp.nome).filter((nome: string) => nome.trim() !== '')
             }
           })
 
@@ -183,7 +183,7 @@ export async function POST(request: NextRequest) {
             error: `Pagamento rejeitado: ${response.status_detail}`
           }, { status: 200 })
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error('❌ Erro ao criar pagamento cartão:', error)
         return NextResponse.json(
           { error: 'Erro ao processar pagamento', details: error.message },
@@ -197,7 +197,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Erro ao criar pagamento:', error)
 
     // Verificar se é erro de constraint única (email duplicado)
