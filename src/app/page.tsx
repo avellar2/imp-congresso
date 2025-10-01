@@ -893,21 +893,7 @@ export default function Home() {
                     <div className="space-y-4">
                       <h5 className="font-semibold text-gray-800">Dados do cartão</h5>
 
-                      {/* Test Cards Info */}
-                      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-                        <div className="flex items-center mb-3">
-                          <svg width="20" height="20" fill="#3B82F6" viewBox="0 0 24 24" className="mr-2">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                          </svg>
-                          <span className="font-medium text-blue-800">Cartões de teste</span>
-                        </div>
-                        <div className="text-sm text-blue-700 space-y-1">
-                          <div><strong>Aprovado:</strong> 4013 4013 4013 4013 - Nome: APRO</div>
-                          <div><strong>Rejeitado:</strong> 4013 4013 4013 4014 - Nome: OTHE</div>
-                          <div><strong>Mastercard:</strong> 5031 7557 3453 0604 - Nome: APRO</div>
-                          <div><strong>Validade:</strong> Qualquer data futura - <strong>CVV:</strong> 123</div>
-                        </div>
-                      </div>
+                      
 
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
