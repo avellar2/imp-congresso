@@ -43,26 +43,37 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Verificar se já existe cadastro
-    console.log('🔍 Verificando usuário existente para:', { email, cpf })
-    const existingUser = await prisma.user.findFirst({
-      where: {
-        OR: [
-          { email },
-          { cpf }
-        ]
+    // Verificar se já existe cadastro apenas para cartão
+    // Para PIX, essa verificação será feita apenas no webhook após confirmação
+    if (paymentMethod !== 'pix') {
+      console.log('🔍 Verificando usuário existente para:', { email, cpf })
+      try {
+        const existingUser = await prisma.user.findFirst({
+          where: {
+            OR: [
+              { email },
+              { cpf }
+            ]
+          }
+        })
+
+        if (existingUser) {
+          console.log('❌ Usuário já existe:', existingUser)
+          return NextResponse.json(
+            { error: 'Email ou CPF já cadastrado' },
+            { status: 400 }
+          )
+        }
+
+        console.log('✅ Usuário não existe, prosseguindo...')
+      } catch (dbError) {
+        console.error('❌ Erro ao verificar usuário no banco:', dbError)
+        return NextResponse.json(
+          { error: 'Erro ao verificar dados no banco', details: dbError instanceof Error ? dbError.message : 'Erro desconhecido' },
+          { status: 500 }
+        )
       }
-    })
-
-    if (existingUser) {
-      console.log('❌ Usuário já existe:', existingUser)
-      return NextResponse.json(
-        { error: 'Email ou CPF já cadastrado' },
-        { status: 400 }
-      )
     }
-
-    console.log('✅ Usuário não existe, prosseguindo...')
 
     // Processar pagamento real com Mercado Pago
     const payment = new Payment(client)
@@ -71,6 +82,8 @@ export async function POST(request: NextRequest) {
     if (paymentMethod === 'pix') {
       // PIX: Criar pagamento PIX real
       console.log('💰 Criando pagamento PIX real')
+      console.log('🔑 Access Token existe?', !!process.env.MERCADO_PAGO_ACCESS_TOKEN)
+      console.log('🏷️ App Name:', process.env.NEXT_PUBLIC_APP_NAME)
 
       try {
         const paymentData = {
@@ -88,9 +101,9 @@ export async function POST(request: NextRequest) {
           }
         }
 
-        console.log('📤 Enviando dados PIX para MP:', paymentData)
+        console.log('📤 Enviando dados PIX para MP:', JSON.stringify(paymentData, null, 2))
         response = await payment.create({ body: paymentData }) as MercadoPagoResponse
-        console.log('📥 Resposta PIX do MP:', response)
+        console.log('📥 Resposta PIX do MP:', JSON.stringify(response, null, 2))
 
         return NextResponse.json({
           success: true,
@@ -112,8 +125,15 @@ export async function POST(request: NextRequest) {
         })
       } catch (error: unknown) {
         console.error('❌ Erro ao criar pagamento PIX:', error)
+        console.error('❌ Stack trace:', error instanceof Error ? error.stack : 'N/A')
+        console.error('❌ Detalhes completos:', JSON.stringify(error, null, 2))
+
         return NextResponse.json(
-          { error: 'Erro ao processar pagamento PIX', details: error instanceof Error ? error.message : 'Erro desconhecido' },
+          {
+            error: 'Erro ao processar pagamento PIX',
+            details: error instanceof Error ? error.message : 'Erro desconhecido',
+            type: error instanceof Error ? error.constructor.name : typeof error
+          },
           { status: 500 }
         )
       }
