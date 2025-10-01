@@ -16,6 +16,7 @@ interface DashboardData {
     pagamentos: {
       valor: number
       status: string
+      acompanhantes: string[]
     }[]
   }[]
 }

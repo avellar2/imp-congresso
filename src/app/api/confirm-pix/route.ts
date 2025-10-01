@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
   } catch (error: unknown) {
     console.error('Erro ao confirmar pagamento PIX:', error)
 
-    if (error.code === 'P2002') {
+    if (error && typeof error === 'object' && 'code' in error && error.code === 'P2002') {
       return NextResponse.json(
         { error: 'Email ou CPF já cadastrado' },
         { status: 400 }

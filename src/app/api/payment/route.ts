@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
 
     // Processar pagamento real com Mercado Pago
     const payment = new Payment(client)
-    let response: unknown
+    let response: any
 
     if (paymentMethod === 'pix') {
       // PIX: Criar pagamento PIX real
@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
       } catch (error: unknown) {
         console.error('❌ Erro ao criar pagamento PIX:', error)
         return NextResponse.json(
-          { error: 'Erro ao processar pagamento PIX', details: error.message },
+          { error: 'Erro ao processar pagamento PIX', details: error instanceof Error ? error.message : 'Erro desconhecido' },
           { status: 500 }
         )
       }
@@ -186,7 +186,7 @@ export async function POST(request: NextRequest) {
       } catch (error: unknown) {
         console.error('❌ Erro ao criar pagamento cartão:', error)
         return NextResponse.json(
-          { error: 'Erro ao processar pagamento', details: error.message },
+          { error: 'Erro ao processar pagamento', details: error instanceof Error ? error.message : 'Erro desconhecido' },
           { status: 500 }
         )
       }
@@ -201,7 +201,7 @@ export async function POST(request: NextRequest) {
     console.error('Erro ao criar pagamento:', error)
 
     // Verificar se é erro de constraint única (email duplicado)
-    if (error.code === 'P2002') {
+    if (error && typeof error === 'object' && 'code' in error && error.code === 'P2002') {
       return NextResponse.json(
         { error: 'Email ou CPF já cadastrado' },
         { status: 400 }
