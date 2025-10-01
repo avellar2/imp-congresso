@@ -204,83 +204,122 @@ export default function Home() {
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-emerald-900 via-green-800 to-emerald-900">
         {/* Decorative Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/95 to-green-800/95 backdrop-blur-sm"></div>
-          <div className="absolute top-0 left-0 w-full h-full opacity-20">
-            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-yellow-400/30 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-yellow-300/20 rounded-full blur-3xl animate-pulse delay-500"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-800/40 via-green-900/60 to-emerald-950"></div>
+          <div className="absolute top-0 left-0 w-full h-full opacity-30">
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-emerald-400/15 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-yellow-300/15 rounded-full blur-3xl animate-pulse" style={{animationDelay: '0.5s'}}></div>
           </div>
 
           {/* Floating Elements */}
-          <div className="absolute inset-0 overflow-hidden opacity-30">
-            <div className="absolute top-20 left-10 text-4xl animate-bounce delay-100">🌸</div>
-            <div className="absolute top-40 right-20 text-3xl animate-pulse delay-300">✨</div>
-            <div className="absolute bottom-32 left-16 text-5xl animate-bounce delay-700">🌿</div>
-            <div className="absolute bottom-40 right-10 text-4xl animate-pulse delay-500">🦋</div>
-            <div className="absolute top-60 left-1/3 text-3xl animate-bounce delay-900">🍃</div>
-            <div className="absolute top-80 right-1/3 text-2xl animate-pulse delay-1100">💫</div>
+          <div className="absolute inset-0 overflow-hidden opacity-20">
+            <div className="absolute top-20 left-10 text-5xl animate-float">✨</div>
+            <div className="absolute top-40 right-20 text-4xl animate-float" style={{animationDelay: '0.3s'}}>🕊️</div>
+            <div className="absolute bottom-32 left-16 text-6xl animate-float" style={{animationDelay: '0.7s'}}>🌿</div>
+            <div className="absolute bottom-40 right-10 text-5xl animate-float" style={{animationDelay: '0.5s'}}>💫</div>
+            <div className="absolute top-60 left-1/3 text-4xl animate-float" style={{animationDelay: '0.9s'}}>🙏</div>
+            <div className="absolute top-80 right-1/3 text-3xl animate-float" style={{animationDelay: '1.1s'}}>✝️</div>
           </div>
         </div>
 
-        <div className="container mx-auto px-6 text-center relative z-10 max-w-5xl">
+        <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl py-12">
           {/* Badge */}
-          <div className="inline-flex items-center bg-yellow-400/20 backdrop-blur-sm border border-yellow-400/30 rounded-full px-6 py-2 mb-8 mt-8 md:mt-0">
-            <span className="text-yellow-300 font-medium tracking-wide text-sm uppercase">Congresso de Mulheres</span>
+          <div className="inline-flex items-center bg-gradient-to-r from-yellow-400/20 to-yellow-500/20 backdrop-blur-md border border-yellow-400/40 rounded-full px-8 py-3 mb-10 mt-8 md:mt-0 shadow-lg hover:shadow-yellow-400/30 transition-all duration-300">
+            <span className="text-yellow-200 font-semibold tracking-wider text-sm uppercase">✨ Congresso de Mulheres ✨</span>
           </div>
 
           {/* Main Title */}
-          <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold mb-6 leading-none">
-            <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent font-serif tracking-tight">
+          <h1 className="text-7xl md:text-8xl lg:text-[10rem] font-black mb-8 leading-none">
+            <span className="bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-400 bg-clip-text text-transparent font-serif tracking-tighter drop-shadow-2xl">
               ESSÊNCIA
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-2xl md:text-3xl font-light text-emerald-100 mb-8 tracking-wide">
-            Desperte sua força interior
+          <p className="text-3xl md:text-4xl font-semibold text-white mb-6 tracking-wide drop-shadow-lg">
+            Prepare-se para um encontro com Deus
           </p>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-emerald-200 mb-12 leading-relaxed max-w-3xl mx-auto font-light">
-            Um encontro transformador dedicado ao empoderamento feminino.
-            Conecte-se com sua essência e descubra o poder que existe dentro de você.
+          <p className="text-xl md:text-2xl text-emerald-100 mb-16 leading-relaxed max-w-4xl mx-auto font-light">
+            Um dia de adoração, louvor e renovação espiritual.<br/>
+            Venha experimentar a presença de Deus e receber uma palavra transformadora para sua vida.
           </p>
 
           {/* Event Details */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300">
+          <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-5xl mx-auto">
+            <div className="bg-white/15 backdrop-blur-lg border border-white/30 rounded-3xl p-8 hover:bg-white/20 hover:scale-105 transition-all duration-300 shadow-2xl">
               <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-yellow-400/20 rounded-full flex items-center justify-center mb-3">
-                  <Calendar className="w-6 h-6 text-yellow-300" />
+                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                  <Calendar className="w-8 h-8 text-white" />
                 </div>
-                <p className="text-yellow-300 font-semibold mb-1">Data</p>
-                <p className="text-emerald-100 text-lg">15 de Novembro</p>
-                <p className="text-emerald-200 text-sm">2025</p>
+                <p className="text-yellow-200 font-bold mb-2 text-lg">Data</p>
+                <p className="text-white text-2xl font-bold">15 de Novembro</p>
+                <p className="text-emerald-200 text-base mt-1">2025</p>
               </div>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300">
+            <div className="bg-white/15 backdrop-blur-lg border border-white/30 rounded-3xl p-8 hover:bg-white/20 hover:scale-105 transition-all duration-300 shadow-2xl">
               <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-yellow-400/20 rounded-full flex items-center justify-center mb-3">
-                  <Clock className="w-6 h-6 text-yellow-300" />
+                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                  <Clock className="w-8 h-8 text-white" />
                 </div>
-                <p className="text-yellow-300 font-semibold mb-1">Horário</p>
-                <p className="text-emerald-100 text-lg">08h00 às 18h00</p>
-                <p className="text-emerald-200 text-sm">Dia completo</p>
+                <p className="text-yellow-200 font-bold mb-2 text-lg">Horário</p>
+                <p className="text-white text-2xl font-bold">08h às 18h</p>
+                <p className="text-emerald-200 text-base mt-1">Dia completo</p>
               </div>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300">
+            <div className="bg-white/15 backdrop-blur-lg border border-white/30 rounded-3xl p-8 hover:bg-white/20 hover:scale-105 transition-all duration-300 shadow-2xl">
               <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-yellow-400/20 rounded-full flex items-center justify-center mb-3">
-                  <MapPin className="w-6 h-6 text-yellow-300" />
+                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                  <MapPin className="w-8 h-8 text-white" />
                 </div>
-                <p className="text-yellow-300 font-semibold mb-1">Local</p>
-                <p className="text-emerald-100 text-lg">Igreja Metodista</p>
-                <p className="text-emerald-200 text-sm">Pantanal</p>
+                <p className="text-yellow-200 font-bold mb-2 text-lg">Local</p>
+                <p className="text-white text-2xl font-bold">Igreja Metodista</p>
+                <p className="text-emerald-200 text-base mt-1">Pantanal</p>
               </div>
             </div>
           </div>
+
+          {/* Price and Benefits Card */}
+          <div className="max-w-2xl mx-auto mb-12">
+            <div className="bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-xl border-2 border-yellow-400/50 rounded-3xl p-8 shadow-2xl">
+              <div className="text-center mb-6">
+                <p className="text-emerald-100 text-lg mb-3 font-medium">Investimento</p>
+                <p className="text-6xl md:text-7xl font-black text-transparent bg-gradient-to-r from-yellow-300 via-yellow-200 to-yellow-300 bg-clip-text mb-2">
+                  R$ 50,00
+                </p>
+                <p className="text-emerald-200 text-sm">Por pessoa</p>
+              </div>
+
+              {/* Benefits */}
+              <div className="border-t border-white/20 pt-6 space-y-4">
+                <p className="text-yellow-200 font-bold text-xl mb-4">✨ Incluso no valor ✨</p>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div className="flex items-center gap-3">
+                      <div className="text-4xl">☕</div>
+                      <div className="text-left">
+                        <p className="text-white font-bold text-lg">Café da Manhã</p>
+                        <p className="text-emerald-200 text-sm">Completo</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                    <div className="flex items-center gap-3">
+                      <div className="text-4xl">🍽️</div>
+                      <div className="text-left">
+                        <p className="text-white font-bold text-lg">Almoço</p>
+                        <p className="text-emerald-200 text-sm">Completo</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* CTA Button */}
           <div className="flex flex-col items-center">
             <button
@@ -289,283 +328,20 @@ export default function Home() {
                 setError('')
                 setIsLoading(false)
               }}
-              className="group relative inline-flex items-center justify-center px-12 py-5 text-xl font-bold text-emerald-900 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-full shadow-2xl hover:shadow-yellow-500/50 transition-all duration-500 transform hover:scale-110 hover:rotate-1 border-2 border-yellow-300 overflow-hidden"
+              className="group relative inline-flex items-center justify-center px-14 py-6 text-2xl font-black text-emerald-900 bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 rounded-full hover:shadow-[0_30px_80px_-15px_rgba(250,204,21,0.7)] transition-all duration-500 hover:scale-110 border-4 border-yellow-200 overflow-hidden animate-pulse-glow"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative flex items-center gap-3">
-                <span className="text-2xl">✨</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-200 to-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <span className="relative flex items-center gap-4">
+                <span className="text-3xl">🙏</span>
                 Garantir Minha Vaga
-                <span className="text-2xl">✨</span>
+                <span className="text-3xl">✨</span>
               </span>
             </button>
 
-            <div className="mt-6 text-center">
-              <p className="text-2xl font-bold text-yellow-300 mb-2">R$ 50,00</p>
-              <p className="text-emerald-200 text-sm flex items-center justify-center gap-2">
-                <span>🍃</span>
-                Café da manhã e almoço inclusos
-                <span>🍃</span>
-              </p>
-            </div>
-
-            {/* Scroll indicator */}
-            <div className="mt-16 animate-bounce">
-              <div className="w-6 h-10 border-2 border-emerald-300/50 rounded-full flex justify-center">
-                <div className="w-1 h-3 bg-emerald-300/70 rounded-full mt-2 animate-pulse"></div>
-              </div>
-            </div>
+            <p className="text-emerald-200/80 text-sm mt-8 max-w-md">
+              🔒 Pagamento 100% seguro via Mercado Pago
+            </p>
           </div>
-        </div>
-      </section>
-
-      {/* Sobre o Evento */}
-      <section id="sobre" className="py-24 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-50/50 via-white to-green-50/50"></div>
-        <div className="absolute top-0 left-0 w-96 h-96 bg-yellow-100/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-emerald-100/40 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            {/* Section Header */}
-            <div className="text-center mb-20">
-              <div className="inline-block bg-gradient-to-r from-emerald-600 to-green-700 bg-clip-text text-transparent text-lg font-semibold mb-4 tracking-wide">
-                DESCUBRA SUA FORÇA
-              </div>
-              <h3 className="text-5xl md:text-6xl font-bold mb-6 text-green-900 leading-tight">
-                O que é o
-                <span className="bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent"> Essência</span>
-              </h3>
-              <p className="text-xl text-green-700/80 leading-relaxed max-w-3xl mx-auto font-light">
-                Um encontro único e transformador dedicado ao empoderamento da mulher.
-                Durante um dia inteiro de inspiração, você participará de experiências que irão despertar sua verdadeira essência.
-              </p>
-            </div>
-
-            {/* Features Grid */}
-            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-              <div className="group relative">
-                <div className="bg-gradient-to-br from-white to-emerald-50/50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-emerald-100/50">
-                  <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-3xl">👑</span>
-                  </div>
-                  <h4 className="text-2xl font-bold mb-4 text-green-900">Palestrantes Inspiradoras</h4>
-                  <p className="text-green-700/80 leading-relaxed">
-                    Mulheres extraordinárias que transformaram suas vidas e agora compartilham suas jornadas para inspirar outras mulheres.
-                  </p>
-                </div>
-              </div>
-
-              <div className="group relative">
-                <div className="bg-gradient-to-br from-white to-emerald-50/50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-emerald-100/50">
-                  <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-3xl">🌸</span>
-                  </div>
-                  <h4 className="text-2xl font-bold mb-4 text-green-900">Workshops Transformadores</h4>
-                  <p className="text-green-700/80 leading-relaxed">
-                    Atividades práticas e dinâmicas que irão despertar sua força interior e revelar todo seu potencial feminino.
-                  </p>
-                </div>
-              </div>
-
-              <div className="group relative">
-                <div className="bg-gradient-to-br from-white to-emerald-50/50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-emerald-100/50">
-                  <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-3xl">✨</span>
-                  </div>
-                  <h4 className="text-2xl font-bold mb-4 text-green-900">Conexões Significativas</h4>
-                  <p className="text-green-700/80 leading-relaxed">
-                    Encontre sua tribo e crie laços femininos genuínos que irão fortalecer sua jornada de crescimento pessoal.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Programação */}
-      <section id="programacao" className="py-24 bg-gradient-to-br from-emerald-50 via-green-50 to-emerald-100 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-100/30 via-transparent to-green-100/30"></div>
-        <div className="absolute top-1/4 right-0 w-64 h-64 bg-yellow-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-emerald-200/30 rounded-full blur-3xl"></div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            {/* Section Header */}
-            <div className="text-center mb-20">
-              <div className="inline-block bg-gradient-to-r from-green-600 to-emerald-700 bg-clip-text text-transparent text-lg font-semibold mb-4 tracking-wide">
-                SUA JORNADA DE TRANSFORMAÇÃO
-              </div>
-              <h3 className="text-5xl md:text-6xl font-bold mb-6 text-green-900 leading-tight">
-                Programação do
-                <span className="bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent"> Dia</span>
-              </h3>
-              <p className="text-xl text-green-700/80 leading-relaxed max-w-3xl mx-auto font-light">
-                Um cronograma cuidadosamente planejado para sua transformação pessoal e crescimento espiritual.
-              </p>
-            </div>
-
-            {/* Timeline */}
-            <div className="relative">
-              {/* Timeline Line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-yellow-400 via-emerald-500 to-green-600 rounded-full hidden lg:block"></div>
-
-              <div className="space-y-12">
-                {/* Morning Sessions */}
-                <div className="lg:flex lg:items-center lg:justify-between">
-                  <div className="lg:w-5/12 lg:text-right lg:pr-12">
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-emerald-200/50 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center gap-3 mb-4 lg:justify-end">
-                        <span className="text-3xl">🌅</span>
-                        <div className="text-right lg:text-left">
-                          <h4 className="text-xl font-bold text-green-900">08h00 - 09h00</h4>
-                          <p className="text-emerald-600 text-sm">Acolhimento</p>
-                        </div>
-                      </div>
-                      <h5 className="text-2xl font-bold text-green-800 mb-3">Café da Manhã & Boas-vindas</h5>
-                      <p className="text-green-700/80">Momento especial de conexão e acolhimento para iniciar nossa jornada juntas.</p>
-                    </div>
-                  </div>
-                  <div className="hidden lg:block w-2/12 text-center">
-                    <div className="w-6 h-6 bg-yellow-400 rounded-full border-4 border-white shadow-lg mx-auto"></div>
-                  </div>
-                  <div className="lg:w-5/12"></div>
-                </div>
-
-                <div className="lg:flex lg:items-center lg:justify-between">
-                  <div className="lg:w-5/12"></div>
-                  <div className="hidden lg:block w-2/12 text-center">
-                    <div className="w-6 h-6 bg-emerald-500 rounded-full border-4 border-white shadow-lg mx-auto"></div>
-                  </div>
-                  <div className="lg:w-5/12 lg:pl-12">
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-emerald-200/50 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="text-3xl">✨</span>
-                        <div>
-                          <h4 className="text-xl font-bold text-green-900">09h00 - 10h30</h4>
-                          <p className="text-emerald-600 text-sm">Palestra</p>
-                        </div>
-                      </div>
-                      <h5 className="text-2xl font-bold text-green-800 mb-3">Despertando Sua Essência</h5>
-                      <p className="text-green-700/80">Descobrindo sua verdadeira identidade feminina e reconnectando com seu poder interior.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="lg:flex lg:items-center lg:justify-between">
-                  <div className="lg:w-5/12 lg:text-right lg:pr-12">
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-emerald-200/50 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center gap-3 mb-4 lg:justify-end">
-                        <span className="text-3xl">🌸</span>
-                        <div className="text-right lg:text-left">
-                          <h4 className="text-xl font-bold text-green-900">10h45 - 12h00</h4>
-                          <p className="text-emerald-600 text-sm">Workshop</p>
-                        </div>
-                      </div>
-                      <h5 className="text-2xl font-bold text-green-800 mb-3">Autoestima & Confiança</h5>
-                      <p className="text-green-700/80">Exercícios práticos e dinâmicas para fortalecer sua autoconfiança e autoestima.</p>
-                    </div>
-                  </div>
-                  <div className="hidden lg:block w-2/12 text-center">
-                    <div className="w-6 h-6 bg-green-600 rounded-full border-4 border-white shadow-lg mx-auto"></div>
-                  </div>
-                  <div className="lg:w-5/12"></div>
-                </div>
-
-                {/* Afternoon Sessions */}
-                <div className="lg:flex lg:items-center lg:justify-between">
-                  <div className="lg:w-5/12"></div>
-                  <div className="hidden lg:block w-2/12 text-center">
-                    <div className="w-6 h-6 bg-yellow-500 rounded-full border-4 border-white shadow-lg mx-auto"></div>
-                  </div>
-                  <div className="lg:w-5/12 lg:pl-12">
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-emerald-200/50 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="text-3xl">🍽️</span>
-                        <div>
-                          <h4 className="text-xl font-bold text-green-900">12h00 - 13h30</h4>
-                          <p className="text-emerald-600 text-sm">Pausa</p>
-                        </div>
-                      </div>
-                      <h5 className="text-2xl font-bold text-green-800 mb-3">Almoço & Networking</h5>
-                      <p className="text-green-700/80">Momento de confraternização, troca de experiências e criação de conexões significativas.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="lg:flex lg:items-center lg:justify-between">
-                  <div className="lg:w-5/12 lg:text-right lg:pr-12">
-                    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-emerald-200/50 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center gap-3 mb-4 lg:justify-end">
-                        <span className="text-3xl">💎</span>
-                        <div className="text-right lg:text-left">
-                          <h4 className="text-xl font-bold text-green-900">13h30 - 15h00</h4>
-                          <p className="text-emerald-600 text-sm">Palestra</p>
-                        </div>
-                      </div>
-                      <h5 className="text-2xl font-bold text-green-800 mb-3">Mulher de Propósito</h5>
-                      <p className="text-green-700/80">Encontrando e vivendo seu propósito de vida com paixão e determinação.</p>
-                    </div>
-                  </div>
-                  <div className="hidden lg:block w-2/12 text-center">
-                    <div className="w-6 h-6 bg-emerald-400 rounded-full border-4 border-white shadow-lg mx-auto"></div>
-                  </div>
-                  <div className="lg:w-5/12"></div>
-                </div>
-
-                <div className="lg:flex lg:items-center lg:justify-between">
-                  <div className="lg:w-5/12"></div>
-                  <div className="hidden lg:block w-2/12 text-center">
-                    <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full border-4 border-white shadow-xl mx-auto flex items-center justify-center">
-                      <span className="text-white text-xs">🌟</span>
-                    </div>
-                  </div>
-                  <div className="lg:w-5/12 lg:pl-12">
-                    <div className="bg-gradient-to-br from-yellow-50 to-emerald-50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-yellow-200/50 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="text-3xl">🌟</span>
-                        <div>
-                          <h4 className="text-xl font-bold text-green-900">15h15 - 18h00</h4>
-                          <p className="text-yellow-600 text-sm font-semibold">Workshop Final</p>
-                        </div>
-                      </div>
-                      <h5 className="text-2xl font-bold text-green-800 mb-3">Plano de Ação Transformador</h5>
-                      <p className="text-green-700/80">Criando seu mapa pessoal para uma vida plena, realizada e alinhada com sua essência.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-emerald-800 to-green-900 text-white py-16 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 left-10 text-4xl animate-pulse">🌺</div>
-          <div className="absolute top-20 right-20 text-3xl animate-bounce">✨</div>
-          <div className="absolute bottom-10 left-20 text-5xl animate-pulse">🦋</div>
-          <div className="absolute bottom-20 right-10 text-4xl animate-bounce">🌿</div>
-        </div>
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h3 className="text-4xl font-bold mb-4">🌟 Transforme Sua Vida Hoje! 🌟</h3>
-          <p className="text-xl mb-8 text-emerald-100">
-            Vagas limitadas - Investimento especial de apenas <span className="text-yellow-400 font-bold">R$ 50,00</span>
-          </p>
-          <div className="mb-6">
-            <p className="text-emerald-200 font-medium">🎁 Incluso: Café da manhã + Almoço</p>
-          </div>
-          <button
-            onClick={() => {
-              setShowForm(true)
-              setError('')
-              setIsLoading(false)
-            }}
-            className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-green-900 px-10 py-4 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-2 border-yellow-400"
-          >
-            ✨ Quero Despertar Minha Essência ✨
-          </button>
         </div>
       </section>
 
