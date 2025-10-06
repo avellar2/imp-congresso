@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       } else {
         // Pagamento PIX sem external_reference - verificar se já foi salvo
         console.log('🔍 Verificando se pagamento PIX já existe no banco')
-        const existingPayment = await prisma.pagamento.findUnique({
+        const existingPayment = await prisma.pagamento.findFirst({
           where: { mercadoPagoId: paymentData.id?.toString() }
         })
 

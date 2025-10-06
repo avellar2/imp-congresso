@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { MercadoPagoConfig, Payment } from 'mercadopago'
 import { prisma } from '@/lib/prisma'
-
-const client = new MercadoPagoConfig({
-  accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN!,
-})
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,7 +15,7 @@ export async function POST(request: NextRequest) {
     console.log('🔍 Verificando status do pagamento PIX:', paymentId)
 
     // Buscar status do pagamento no banco de dados
-    const pagamento = await prisma.pagamento.findUnique({
+    const pagamento = await prisma.pagamento.findFirst({
       where: { mercadoPagoId: paymentId.toString() },
       include: { user: true }
     })

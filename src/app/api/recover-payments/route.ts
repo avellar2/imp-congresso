@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { MercadoPagoConfig, Payment } from 'mercadopago'
 import { prisma } from '@/lib/prisma'
 
@@ -38,7 +38,7 @@ async function recoverPayments() {
         console.log(`\n💳 Processando pagamento ${paymentData.id}`)
 
         // Verificar se já existe no banco
-        const existingPayment = await prisma.pagamento.findUnique({
+        const existingPayment = await prisma.pagamento.findFirst({
           where: { mercadoPagoId: paymentData.id?.toString() }
         })
 
@@ -55,7 +55,7 @@ async function recoverPayments() {
         // Extrair dados do pagador
         const email = paymentData.payer?.email
         const cpf = paymentData.payer?.identification?.number
-        const nome = `${paymentData.payer?.first_name || ''} ${paymentData.payer?.last_name || ''}`.trim()
+        const nome = paymentData.description?.split(' - ')[1] || paymentData.payer?.email?.split('@')[0] || 'Usuário PIX'
 
         if (!email || !cpf || !nome) {
           console.log(`❌ Dados incompletos para pagamento ${paymentData.id}`)
@@ -154,10 +154,10 @@ async function recoverPayments() {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   return recoverPayments()
 }
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   return recoverPayments()
 }
