@@ -44,16 +44,22 @@ export default function Home() {
         body: JSON.stringify({ paymentId })
       })
 
-      const data = await response.json()
-      console.log('📊 Status retornado:', data)
+      if (!response.ok) {
+        console.error('❌ Erro na resposta:', response.status)
+        return false
+      }
 
-      if (data.success && data.dbStatus === 'APROVADO') {
+      const data = await response.json()
+      console.log('📊 Status retornado completo:', JSON.stringify(data, null, 2))
+
+      // Verificar se o pagamento foi aprovado
+      if (data.dbStatus === 'APROVADO' || data.status === 'approved') {
         console.log('✅ Pagamento PIX aprovado! Redirecionando...')
-        setCheckingPixPayment(false)
         window.location.href = `/success?userId=${data.userId}`
         return true
       }
 
+      console.log('⏳ Pagamento ainda pendente, continuando polling...')
       return false
     } catch (error) {
       console.error('❌ Erro ao verificar pagamento:', error)
