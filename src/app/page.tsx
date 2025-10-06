@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Calendar, MapPin, Clock } from 'lucide-react'
 
 export default function Home() {
@@ -26,9 +26,69 @@ export default function Home() {
   const [showPixPayment, setShowPixPayment] = useState(false)
   const [pixData, setPixData] = useState<{qrCode: string, qrCodeText?: string, paymentId?: string, temporaryData?: Record<string, unknown>} | null>(null)
   const [acompanhantes, setAcompanhantes] = useState<Array<{nome: string}>>([])
+  const [checkingPixPayment, setCheckingPixPayment] = useState(false)
 
   const TAXA_INSCRICAO = 50
   const valorTotal = (1 + acompanhantes.length) * TAXA_INSCRICAO
+
+  // Função para verificar status do pagamento PIX
+  const checkPixPaymentStatus = async (paymentId: string) => {
+    try {
+      console.log('🔍 Verificando status do pagamento PIX:', paymentId)
+
+      const response = await fetch('/api/check-pix', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ paymentId })
+      })
+
+      const data = await response.json()
+      console.log('📊 Status retornado:', data)
+
+      if (data.success && data.dbStatus === 'APROVADO') {
+        console.log('✅ Pagamento PIX aprovado! Redirecionando...')
+        setCheckingPixPayment(false)
+        window.location.href = `/success?userId=${data.userId}`
+        return true
+      }
+
+      return false
+    } catch (error) {
+      console.error('❌ Erro ao verificar pagamento:', error)
+      return false
+    }
+  }
+
+  // useEffect para polling do pagamento PIX
+  useEffect(() => {
+    if (showPixPayment && pixData?.paymentId && !checkingPixPayment) {
+      setCheckingPixPayment(true)
+
+      // Verificar a cada 3 segundos por até 10 minutos (200 tentativas)
+      let attempts = 0
+      const maxAttempts = 200
+
+      const intervalId = setInterval(async () => {
+        attempts++
+        console.log(`🔄 Tentativa ${attempts}/${maxAttempts}`)
+
+        const approved = await checkPixPaymentStatus(pixData.paymentId as string)
+
+        if (approved || attempts >= maxAttempts) {
+          clearInterval(intervalId)
+          if (attempts >= maxAttempts) {
+            console.log('⏰ Tempo limite de verificação atingido')
+            setCheckingPixPayment(false)
+          }
+        }
+      }, 3000)
+
+      // Limpar intervalo quando o componente for desmontado
+      return () => clearInterval(intervalId)
+    }
+  }, [showPixPayment, pixData, checkingPixPayment])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

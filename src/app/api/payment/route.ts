@@ -86,6 +86,25 @@ export async function POST(request: NextRequest) {
       console.log('🏷️ App Name:', process.env.NEXT_PUBLIC_APP_NAME)
 
       try {
+        // Verificar se já existe cadastro (antes de criar o pagamento)
+        console.log('🔍 Verificando usuário existente para PIX:', { email, cpf })
+        const existingUser = await prisma.user.findFirst({
+          where: {
+            OR: [
+              { email },
+              { cpf }
+            ]
+          }
+        })
+
+        if (existingUser) {
+          console.log('❌ Usuário já existe:', existingUser)
+          return NextResponse.json(
+            { error: 'Email ou CPF já cadastrado' },
+            { status: 400 }
+          )
+        }
+
         const paymentData = {
           transaction_amount: valorTotal,
           description: `Inscrição ${process.env.NEXT_PUBLIC_APP_NAME} - ${nome}`,
@@ -105,10 +124,44 @@ export async function POST(request: NextRequest) {
         response = await payment.create({ body: paymentData }) as MercadoPagoResponse
         console.log('📥 Resposta PIX do MP:', JSON.stringify(response, null, 2))
 
+        // SALVAR NO BANCO IMEDIATAMENTE COM STATUS PENDENTE
+        console.log('💾 Salvando dados no banco com status PENDENTE...')
+
+        // Criar usuário
+        const user = await prisma.user.create({
+          data: {
+            nome,
+            email,
+            cpf,
+            telefone
+          }
+        })
+
+        // Extrair nomes dos acompanhantes
+        const nomesAcompanhantes = acompanhantes
+          .map((acomp: {nome: string}) => acomp.nome)
+          .filter((nome: string) => nome && nome.trim() !== '')
+
+        // Criar registro de pagamento PENDENTE
+        await prisma.pagamento.create({
+          data: {
+            userId: user.id,
+            valor: valorTotal,
+            status: 'PENDENTE',
+            mercadoPagoId: response.id?.toString(),
+            mercadoPagoStatus: response.status || 'pending',
+            acompanhantes: nomesAcompanhantes
+          }
+        })
+
+        console.log('✅ Usuário e pagamento PENDENTE salvos no banco!')
+        console.log(`👥 Acompanhantes salvos: ${nomesAcompanhantes.length}`)
+
         return NextResponse.json({
           success: true,
           paymentMethod: 'pix',
           paymentId: response.id?.toString(),
+          userId: user.id,
           status: response.status,
           statusDetail: response.status_detail,
           qrCode: response.point_of_interaction?.transaction_data?.qr_code_base64,
