@@ -63,32 +63,39 @@ export default function Home() {
 
   // useEffect para polling do pagamento PIX
   useEffect(() => {
-    if (showPixPayment && pixData?.paymentId && !checkingPixPayment) {
-      setCheckingPixPayment(true)
-
-      // Verificar a cada 3 segundos por até 10 minutos (200 tentativas)
-      let attempts = 0
-      const maxAttempts = 200
-
-      const intervalId = setInterval(async () => {
-        attempts++
-        console.log(`🔄 Tentativa ${attempts}/${maxAttempts}`)
-
-        const approved = await checkPixPaymentStatus(pixData.paymentId as string)
-
-        if (approved || attempts >= maxAttempts) {
-          clearInterval(intervalId)
-          if (attempts >= maxAttempts) {
-            console.log('⏰ Tempo limite de verificação atingido')
-            setCheckingPixPayment(false)
-          }
-        }
-      }, 3000)
-
-      // Limpar intervalo quando o componente for desmontado
-      return () => clearInterval(intervalId)
+    if (!showPixPayment || !pixData?.paymentId) {
+      return
     }
-  }, [showPixPayment, pixData, checkingPixPayment])
+
+    console.log('🚀 Iniciando polling do pagamento PIX')
+    setCheckingPixPayment(true)
+
+    // Verificar a cada 3 segundos por até 10 minutos (200 tentativas)
+    let attempts = 0
+    const maxAttempts = 200
+
+    const intervalId = setInterval(async () => {
+      attempts++
+      console.log(`🔄 Tentativa ${attempts}/${maxAttempts}`)
+
+      const approved = await checkPixPaymentStatus(pixData.paymentId as string)
+
+      if (approved || attempts >= maxAttempts) {
+        clearInterval(intervalId)
+        if (attempts >= maxAttempts) {
+          console.log('⏰ Tempo limite de verificação atingido')
+          setCheckingPixPayment(false)
+        }
+      }
+    }, 3000)
+
+    // Limpar intervalo quando o componente for desmontado
+    return () => {
+      console.log('🧹 Limpando intervalo de polling')
+      clearInterval(intervalId)
+      setCheckingPixPayment(false)
+    }
+  }, [showPixPayment, pixData?.paymentId])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
