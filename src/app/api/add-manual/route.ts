@@ -3,16 +3,17 @@ import { prisma } from '@/lib/prisma'
 
 export async function POST() {
   try {
+    const timestamp = Date.now()
     const pessoas = [
-      { nome: 'Neusa Gomes - IMP', email: 'neusagomes@imp.com', cpf: '00000000010' },
-      { nome: 'Railda - IMP', email: 'railda@imp.com', cpf: '00000000011' },
-      { nome: 'Nadir - IMP', email: 'nadir@imp.com', cpf: '00000000012' },
-      { nome: 'Suellen - IMP', email: 'suellen@imp.com', cpf: '00000000013' },
-      { nome: 'Bianca Lourenço - IMP', email: 'biancalourenco@imp.com', cpf: '00000000014' },
-      { nome: 'Aparecida - IMP', email: 'aparecida@imp.com', cpf: '00000000015' },
-      { nome: 'Enir - IMP', email: 'enir@imp.com', cpf: '00000000016' },
-      { nome: 'Deusimar - IMP', email: 'deusimar@imp.com', cpf: '00000000017' },
-      { nome: 'Isabella - IMP', email: 'isabella@imp.com', cpf: '00000000018' }
+      { nome: 'Neusa Gomes - IMP', email: `neusagomes.${timestamp}@imp.local`, cpf: `${timestamp}10` },
+      { nome: 'Railda - IMP', email: `railda.${timestamp}@imp.local`, cpf: `${timestamp}11` },
+      { nome: 'Nadir - IMP', email: `nadir.${timestamp}@imp.local`, cpf: `${timestamp}12` },
+      { nome: 'Suellen - IMP', email: `suellen.${timestamp}@imp.local`, cpf: `${timestamp}13` },
+      { nome: 'Bianca Lourenço - IMP', email: `biancalourenco.${timestamp}@imp.local`, cpf: `${timestamp}14` },
+      { nome: 'Aparecida - IMP', email: `aparecida.${timestamp}@imp.local`, cpf: `${timestamp}15` },
+      { nome: 'Enir - IMP', email: `enir.${timestamp}@imp.local`, cpf: `${timestamp}16` },
+      { nome: 'Deusimar - IMP', email: `deusimar.${timestamp}@imp.local`, cpf: `${timestamp}17` },
+      { nome: 'Isabella - IMP', email: `isabella.${timestamp}@imp.local`, cpf: `${timestamp}18` }
     ]
 
     const criados = []
