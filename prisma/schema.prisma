@@ -21,16 +21,17 @@ model User {
 }
 
 model Pagamento {
-  id                String          @id @default(cuid())
+  id                String           @id @default(cuid())
   userId            String
   valor             Float
-  status            StatusPagamento @default(PENDENTE)
+  status            StatusPagamento  @default(PENDENTE)
   mercadoPagoId     String?
   mercadoPagoStatus String?
-  acompanhantes     String[]        @default([])
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
-  user              User            @relation(fields: [userId], references: [id])
+  metodoPagamento   MetodoPagamento? @default(PIX)
+  acompanhantes     String[]         @default([])
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  user              User             @relation(fields: [userId], references: [id])
 
   @@map("pagamentos")
 }
@@ -40,4 +41,11 @@ enum StatusPagamento {
   APROVADO
   REJEITADO
   CANCELADO
+}
+
+enum MetodoPagamento {
+  PIX
+  CREDITO
+  DEBITO
+  DINHEIRO
 }

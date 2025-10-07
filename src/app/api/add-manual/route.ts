@@ -37,6 +37,7 @@ export async function POST() {
           status: 'PENDENTE',
           mercadoPagoId: null,
           mercadoPagoStatus: 'manual',
+          metodoPagamento: 'DINHEIRO',
           acompanhantes: []
         }
       })

@@ -16,6 +16,7 @@ interface DashboardData {
     pagamentos: {
       valor: number
       status: string
+      metodoPagamento: string
       acompanhantes: string[]
     }[]
   }[]
@@ -159,9 +160,9 @@ export default function Admin() {
           <div className="px-6 py-4 border-b border-gray-200">
             <h2 className="text-lg font-semibold text-gray-900">Inscrições Recentes</h2>
           </div>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto max-h-[600px] overflow-y-auto">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-50 sticky top-0">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nome
@@ -174,6 +175,9 @@ export default function Admin() {
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Valor
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Método
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Acompanhantes
@@ -197,6 +201,17 @@ export default function Admin() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       R$ {user.pagamentos[0]?.valor.toFixed(2) || '0.00'}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                        user.pagamentos[0]?.metodoPagamento === 'PIX' ? 'bg-blue-100 text-blue-800' :
+                        user.pagamentos[0]?.metodoPagamento === 'DINHEIRO' ? 'bg-green-100 text-green-800' :
+                        user.pagamentos[0]?.metodoPagamento === 'CREDITO' ? 'bg-purple-100 text-purple-800' :
+                        user.pagamentos[0]?.metodoPagamento === 'DEBITO' ? 'bg-orange-100 text-orange-800' :
+                        'bg-gray-100 text-gray-800'
+                      }`}>
+                        {user.pagamentos[0]?.metodoPagamento || 'PIX'}
+                      </span>
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
                       {user.pagamentos[0]?.acompanhantes?.length > 0 ? (
