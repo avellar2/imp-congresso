@@ -155,10 +155,10 @@ export default function Admin() {
           </button>
         </div>
 
-        {/* Tabela de Inscrições Recentes */}
+        {/* Tabela de Inscrições */}
         <div className="bg-white shadow rounded-lg overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Inscrições Recentes</h2>
+            <h2 className="text-lg font-semibold text-gray-900">Todas as Inscrições</h2>
           </div>
           <div className="overflow-x-auto max-h-[600px] overflow-y-auto">
             <table className="min-w-full divide-y divide-gray-200">

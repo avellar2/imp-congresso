@@ -23,9 +23,8 @@ export async function GET() {
         where: { status: 'PENDENTE' }
       }),
       
-      // Inscrições recentes (últimas 10)
+      // Todas as inscrições
       prisma.user.findMany({
-        take: 10,
         orderBy: { createdAt: 'desc' },
         include: {
           pagamentos: {
