@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Users, DollarSign, TrendingUp, Calendar, Download } from 'lucide-react'
+import { Users, DollarSign, TrendingUp, Calendar, Download, UserPlus, Trash2 } from 'lucide-react'
+import AddInscricaoModal from '@/components/AddInscricaoModal'
 
 interface DashboardData {
   totalUsers: number
@@ -25,6 +26,9 @@ interface DashboardData {
 export default function Admin() {
   const [data, setData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [deleteConfirm, setDeleteConfirm] = useState<{ id: string; nome: string } | null>(null)
+  const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
     fetchDashboardData()
@@ -56,6 +60,29 @@ export default function Admin() {
       window.URL.revokeObjectURL(url)
     } catch (error) {
       console.error('Erro ao exportar dados:', error)
+    }
+  }
+
+  const handleDelete = async () => {
+    if (!deleteConfirm) return
+
+    setDeleting(true)
+    try {
+      const response = await fetch(`/api/admin/inscricoes/${deleteConfirm.id}`, {
+        method: 'DELETE',
+      })
+
+      if (!response.ok) {
+        throw new Error('Erro ao deletar inscrição')
+      }
+
+      await fetchDashboardData()
+      setDeleteConfirm(null)
+    } catch (error) {
+      console.error('Erro ao deletar inscrição:', error)
+      alert('Erro ao deletar inscrição')
+    } finally {
+      setDeleting(false)
     }
   }
 
@@ -145,7 +172,14 @@ export default function Admin() {
         </div>
 
         {/* Ações */}
-        <div className="mb-8">
+        <div className="mb-8 flex gap-3">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium transition-colors flex items-center gap-2"
+          >
+            <UserPlus className="w-4 h-4" />
+            Adicionar Inscrição Manual
+          </button>
           <button
             onClick={exportData}
             className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-medium transition-colors flex items-center gap-2"
@@ -184,6 +218,9 @@ export default function Admin() {
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Ações
                   </th>
                 </tr>
               </thead>
@@ -236,12 +273,59 @@ export default function Admin() {
                         {user.pagamentos[0]?.status || 'PENDENTE'}
                       </span>
                     </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <button
+                        onClick={() => setDeleteConfirm({ id: user.id, nome: user.nome })}
+                        className="text-red-600 hover:text-red-800 transition-colors"
+                        title="Deletar inscrição"
+                      >
+                        <Trash2 className="w-5 h-5" />
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </div>
+
+        {/* Modal de Adicionar */}
+        <AddInscricaoModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={fetchDashboardData}
+        />
+
+        {/* Modal de Confirmação de Delete */}
+        {deleteConfirm && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg max-w-md w-full p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Confirmar Exclusão
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Tem certeza que deseja deletar a inscrição de <strong>{deleteConfirm.nome}</strong>?
+                Esta ação não pode ser desfeita.
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setDeleteConfirm(null)}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+                  disabled={deleting}
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={handleDelete}
+                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors disabled:opacity-50"
+                  disabled={deleting}
+                >
+                  {deleting ? 'Deletando...' : 'Deletar'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
