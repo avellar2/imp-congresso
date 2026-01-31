@@ -28,7 +28,7 @@ export default function Home() {
   const [acompanhantes, setAcompanhantes] = useState<Array<{nome: string}>>([])
   const [checkingPixPayment, setCheckingPixPayment] = useState(false)
 
-  const TAXA_INSCRICAO = 50
+  const TAXA_INSCRICAO = 25
   const valorTotal = (1 + acompanhantes.length) * TAXA_INSCRICAO
 
   // Função para verificar status do pagamento PIX
@@ -271,124 +271,100 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-peach-50 to-yellow-50">
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-emerald-900 via-green-800 to-emerald-900">
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-pink-100 via-peach-100 to-yellow-100">
         {/* Decorative Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-800/40 via-green-900/60 to-emerald-950"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-pink-200/40 via-orange-100/50 to-yellow-200/40"></div>
           <div className="absolute top-0 left-0 w-full h-full opacity-30">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-emerald-400/15 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-yellow-300/15 rounded-full blur-3xl animate-pulse" style={{animationDelay: '0.5s'}}></div>
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-rose-300/30 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-amber-300/25 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-pink-300/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '0.5s'}}></div>
           </div>
 
-          {/* Floating Elements */}
+          {/* Floating Flower Elements */}
           <div className="absolute inset-0 overflow-hidden opacity-20">
-            <div className="absolute top-20 left-10 text-5xl animate-float">✨</div>
-            <div className="absolute top-40 right-20 text-4xl animate-float" style={{animationDelay: '0.3s'}}>🕊️</div>
-            <div className="absolute bottom-32 left-16 text-6xl animate-float" style={{animationDelay: '0.7s'}}>🌿</div>
-            <div className="absolute bottom-40 right-10 text-5xl animate-float" style={{animationDelay: '0.5s'}}>💫</div>
-            <div className="absolute top-60 left-1/3 text-4xl animate-float" style={{animationDelay: '0.9s'}}>🙏</div>
-            <div className="absolute top-80 right-1/3 text-3xl animate-float" style={{animationDelay: '1.1s'}}>✝️</div>
+            <div className="absolute top-20 left-10 text-6xl animate-float" style={{filter: 'hue-rotate(20deg)'}}>🌸</div>
+            <div className="absolute top-40 right-20 text-5xl animate-float" style={{animationDelay: '0.3s', filter: 'hue-rotate(20deg)'}}>🌺</div>
+            <div className="absolute bottom-32 left-16 text-7xl animate-float" style={{animationDelay: '0.7s', filter: 'hue-rotate(20deg)'}}>🌼</div>
+            <div className="absolute bottom-40 right-10 text-6xl animate-float" style={{animationDelay: '0.5s'}}>✨</div>
+            <div className="absolute top-60 left-1/3 text-5xl animate-float" style={{animationDelay: '0.9s', filter: 'hue-rotate(20deg)'}}>🌷</div>
+            <div className="absolute top-80 right-1/3 text-4xl animate-float" style={{animationDelay: '1.1s', filter: 'hue-rotate(20deg)'}}>🌹</div>
+            <div className="absolute top-1/2 left-20 text-4xl animate-float opacity-30" style={{animationDelay: '0.6s'}}>☕</div>
+            <div className="absolute bottom-20 right-1/4 text-3xl animate-float opacity-30" style={{animationDelay: '1.3s'}}>☕</div>
           </div>
         </div>
 
         <div className="container mx-auto px-6 text-center relative z-10 max-w-6xl py-12">
           {/* Badge */}
-          <div className="inline-flex items-center bg-gradient-to-r from-yellow-400/20 to-yellow-500/20 backdrop-blur-md border border-yellow-400/40 rounded-full px-8 py-3 mb-10 mt-8 md:mt-0 shadow-lg hover:shadow-yellow-400/30 transition-all duration-300">
-            <span className="text-yellow-200 font-semibold tracking-wider text-sm uppercase">✨ Congresso de Mulheres ✨</span>
+          <div className="inline-flex items-center bg-gradient-to-r from-amber-400/30 to-yellow-400/30 backdrop-blur-md border border-amber-400/50 rounded-full px-8 py-3 mb-8 mt-8 md:mt-0 shadow-lg hover:shadow-amber-400/40 transition-all duration-300">
+            <span className="text-3xl mr-2">☕</span>
+            <span className="text-amber-900 font-semibold tracking-wider text-base uppercase">Coffee Break</span>
           </div>
 
+          {/* Subtitle First */}
+          <p className="text-2xl md:text-3xl font-serif text-gray-800 mb-6 tracking-wide">
+            Evento especial dia internacional das
+          </p>
+
           {/* Main Title */}
-          <h1 className="text-7xl md:text-8xl lg:text-[10rem] font-black mb-8 leading-none">
-            <span className="bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-400 bg-clip-text text-transparent font-serif tracking-tighter drop-shadow-2xl">
-              ESSÊNCIA
+          <h1 className="text-6xl md:text-8xl lg:text-[9rem] font-black mb-8 leading-none px-4">
+            <span className="bg-gradient-to-r from-amber-500 via-yellow-600 to-amber-600 bg-clip-text text-transparent font-serif tracking-tight drop-shadow-2xl">
+              MULHERES
             </span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-3xl md:text-4xl font-semibold text-white mb-6 tracking-wide drop-shadow-lg">
-            Prepare-se para um encontro com Deus
+          {/* Description */}
+          <p className="text-xl md:text-2xl text-gray-700 mb-16 leading-relaxed max-w-3xl mx-auto font-light px-4">
+            Venha passar essa tarde maravilhosa cheia de Deus com a gente
           </p>
 
-          {/* Description */}
-          <p className="text-xl md:text-2xl text-emerald-100 mb-16 leading-relaxed max-w-4xl mx-auto font-light">
-            Um dia de adoração, louvor e renovação espiritual.<br/>
-            Venha experimentar a presença de Deus e receber uma palavra transformadora para sua vida.
-          </p>
+          {/* Preletora */}
+          <div className="mb-16 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl font-serif text-gray-800 mb-3">
+              Preletora:
+            </p>
+            <p className="text-2xl md:text-3xl font-bold text-amber-700">
+              Seminarista Thaisis
+            </p>
+          </div>
 
           {/* Event Details */}
-          <div className="grid md:grid-cols-3 gap-6 mb-16 max-w-5xl mx-auto">
-            <div className="bg-white/15 backdrop-blur-lg border border-white/30 rounded-3xl p-8 hover:bg-white/20 hover:scale-105 transition-all duration-300 shadow-2xl">
+          <div className="grid md:grid-cols-2 gap-6 mb-16 max-w-3xl mx-auto">
+            <div className="bg-white/60 backdrop-blur-lg border-2 border-amber-300/50 rounded-3xl p-8 hover:bg-white/70 hover:scale-105 transition-all duration-300 shadow-xl">
               <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                   <Calendar className="w-8 h-8 text-white" />
                 </div>
-                <p className="text-yellow-200 font-bold mb-2 text-lg">Data</p>
-                <p className="text-white text-2xl font-bold">15 de Novembro</p>
-                <p className="text-emerald-200 text-base mt-1">2025</p>
+                <p className="text-amber-700 font-bold mb-2 text-lg">Data</p>
+                <p className="text-gray-900 text-3xl font-bold">14 de Março</p>
+                <p className="text-amber-600 text-base mt-1">2025</p>
               </div>
             </div>
 
-            <div className="bg-white/15 backdrop-blur-lg border border-white/30 rounded-3xl p-8 hover:bg-white/20 hover:scale-105 transition-all duration-300 shadow-2xl">
+            <div className="bg-white/60 backdrop-blur-lg border-2 border-amber-300/50 rounded-3xl p-8 hover:bg-white/70 hover:scale-105 transition-all duration-300 shadow-xl">
               <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                   <Clock className="w-8 h-8 text-white" />
                 </div>
-                <p className="text-yellow-200 font-bold mb-2 text-lg">Horário</p>
-                <p className="text-white text-2xl font-bold">08h às 18h</p>
-                <p className="text-emerald-200 text-base mt-1">Dia completo</p>
-              </div>
-            </div>
-
-            <div className="bg-white/15 backdrop-blur-lg border border-white/30 rounded-3xl p-8 hover:bg-white/20 hover:scale-105 transition-all duration-300 shadow-2xl">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
-                  <MapPin className="w-8 h-8 text-white" />
-                </div>
-                <p className="text-yellow-200 font-bold mb-2 text-lg">Local</p>
-                <p className="text-white text-2xl font-bold">Igreja Metodista</p>
-                <p className="text-emerald-200 text-base mt-1">Pantanal</p>
+                <p className="text-amber-700 font-bold mb-2 text-lg">Horário</p>
+                <p className="text-gray-900 text-3xl font-bold">16h</p>
+                <p className="text-amber-600 text-base mt-1">Tarde especial</p>
               </div>
             </div>
           </div>
 
-          {/* Price and Benefits Card */}
-          <div className="max-w-2xl mx-auto mb-12">
-            <div className="bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-xl border-2 border-yellow-400/50 rounded-3xl p-8 shadow-2xl">
-              <div className="text-center mb-6">
-                <p className="text-emerald-100 text-lg mb-3 font-medium">Investimento</p>
-                <p className="text-6xl md:text-7xl font-black text-transparent bg-gradient-to-r from-yellow-300 via-yellow-200 to-yellow-300 bg-clip-text mb-2">
-                  R$ 50,00
+          {/* Price Card */}
+          <div className="max-w-xl mx-auto mb-12">
+            <div className="bg-white/70 backdrop-blur-xl border-3 border-amber-400/60 rounded-3xl p-10 shadow-2xl hover:shadow-3xl transition-all duration-300">
+              <div className="text-center">
+                <p className="text-gray-700 text-xl mb-4 font-semibold">Investimento</p>
+                <p className="text-6xl md:text-7xl font-black text-transparent bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-500 bg-clip-text mb-3 whitespace-nowrap">
+                  R$ 25,00
                 </p>
-                <p className="text-emerald-200 text-sm">Por pessoa</p>
-              </div>
-
-              {/* Benefits */}
-              <div className="border-t border-white/20 pt-6 space-y-4">
-                <p className="text-yellow-200 font-bold text-xl mb-4">✨ Incluso no valor ✨</p>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/20 hover:bg-white/15 transition-all duration-300">
-                    <div className="flex items-center gap-3">
-                      <div className="text-4xl">☕</div>
-                      <div className="text-left">
-                        <p className="text-white font-bold text-lg">Café da Manhã</p>
-                        <p className="text-emerald-200 text-sm">Completo</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/20 hover:bg-white/15 transition-all duration-300">
-                    <div className="flex items-center gap-3">
-                      <div className="text-4xl">🍽️</div>
-                      <div className="text-left">
-                        <p className="text-white font-bold text-lg">Almoço</p>
-                        <p className="text-emerald-200 text-sm">Completo</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <p className="text-amber-700 text-base font-medium">Por pessoa</p>
               </div>
             </div>
           </div>
@@ -401,17 +377,17 @@ export default function Home() {
                 setError('')
                 setIsLoading(false)
               }}
-              className="group relative inline-flex items-center justify-center px-14 py-6 text-2xl font-black text-emerald-900 bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 rounded-full hover:shadow-[0_30px_80px_-15px_rgba(250,204,21,0.7)] transition-all duration-500 hover:scale-110 border-4 border-yellow-200 overflow-hidden animate-pulse-glow"
+              className="group relative inline-flex items-center justify-center px-14 py-6 text-2xl font-black text-white bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 rounded-full hover:shadow-[0_30px_80px_-15px_rgba(245,158,11,0.7)] transition-all duration-500 hover:scale-110 border-4 border-amber-300 overflow-hidden animate-pulse-glow"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-200 to-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <span className="relative flex items-center gap-4">
-                <span className="text-3xl">🙏</span>
+                <span className="text-3xl">🌸</span>
                 Garantir Minha Vaga
                 <span className="text-3xl">✨</span>
               </span>
             </button>
 
-            <p className="text-emerald-200/80 text-sm mt-8 max-w-md">
+            <p className="text-gray-700/80 text-sm mt-8 max-w-md font-medium">
               🔒 Pagamento 100% seguro via Mercado Pago
             </p>
           </div>
@@ -464,7 +440,7 @@ export default function Home() {
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-700">Congresso de Mulheres - Essência</span>
+                      <span className="text-gray-700">Coffee Break - Dia das Mulheres</span>
                       <span className="font-semibold text-gray-800">R$ {TAXA_INSCRICAO},00</span>
                     </div>
                     {acompanhantes.length > 0 && (
@@ -473,10 +449,6 @@ export default function Home() {
                         <span className="font-semibold text-gray-800">R$ {acompanhantes.length * TAXA_INSCRICAO},00</span>
                       </div>
                     )}
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-700">Inclui: Café da manhã + Almoço</span>
-                      <span className="text-green-700 font-semibold">Grátis</span>
-                    </div>
                     <div className="border-t pt-2 flex justify-between font-bold text-base">
                       <span className="text-gray-800">Total ({1 + acompanhantes.length} pessoa{acompanhantes.length !== 0 ? 's' : ''})</span>
                       <span className="text-[#00B1EA]">R$ {valorTotal},00</span>
@@ -1058,9 +1030,10 @@ export default function Home() {
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-gradient-to-r from-amber-900 via-yellow-900 to-amber-900 text-white py-8">
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; 2025 Congresso Essência. Todos os direitos reservados.</p>
+          <p className="text-amber-100">&copy; 2025 Coffee Break - Dia das Mulheres. Todos os direitos reservados.</p>
+          <p className="text-amber-200/80 text-sm mt-2">Igreja Metodista em Pantanal - IMP</p>
         </div>
       </footer>
     </div>
