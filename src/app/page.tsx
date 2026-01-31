@@ -310,8 +310,8 @@ export default function Home() {
           </p>
 
           {/* Main Title */}
-          <h1 className="text-6xl md:text-8xl lg:text-[9rem] font-black mb-8 leading-none px-4">
-            <span className="bg-gradient-to-r from-amber-500 via-yellow-600 to-amber-600 bg-clip-text text-transparent font-serif tracking-tight drop-shadow-2xl">
+          <h1 className="text-6xl md:text-8xl lg:text-[9rem] font-black mb-8 leading-none px-4 text-center">
+            <span className="bg-gradient-to-r from-amber-500 via-yellow-600 to-amber-600 bg-clip-text text-transparent font-serif tracking-normal drop-shadow-2xl inline-block">
               MULHERES
             </span>
           </h1>
