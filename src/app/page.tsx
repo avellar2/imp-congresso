@@ -340,7 +340,7 @@ export default function Home() {
                 </div>
                 <p className="text-amber-700 font-bold mb-2 text-lg">Data</p>
                 <p className="text-gray-900 text-3xl font-bold">14 de Março</p>
-                <p className="text-amber-600 text-base mt-1">2025</p>
+                <p className="text-amber-600 text-base mt-1">2026</p>
               </div>
             </div>
 
@@ -1032,7 +1032,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gradient-to-r from-amber-900 via-yellow-900 to-amber-900 text-white py-8">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-amber-100">&copy; 2025 Coffee Break - Dia das Mulheres. Todos os direitos reservados.</p>
+          <p className="text-amber-100">&copy; 2026 Coffee Break - Dia das Mulheres. Todos os direitos reservados.</p>
           <p className="text-amber-200/80 text-sm mt-2">Igreja Metodista em Pantanal - IMP</p>
         </div>
       </footer>
