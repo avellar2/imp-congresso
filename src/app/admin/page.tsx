@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Users, DollarSign, TrendingUp, Calendar, Download, UserPlus, Trash2 } from 'lucide-react'
+import { Users, DollarSign, TrendingUp, Calendar, Download, UserPlus, Trash2, CheckCircle } from 'lucide-react'
 import AddInscricaoModal from '@/components/AddInscricaoModal'
 
 interface DashboardData {
@@ -29,6 +29,7 @@ export default function Admin() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState<{ id: string; nome: string } | null>(null)
   const [deleting, setDeleting] = useState(false)
+  const [approvingId, setApprovingId] = useState<string | null>(null)
 
   useEffect(() => {
     fetchDashboardData()
@@ -60,6 +61,28 @@ export default function Admin() {
       window.URL.revokeObjectURL(url)
     } catch (error) {
       console.error('Erro ao exportar dados:', error)
+    }
+  }
+
+  const handleApprove = async (userId: string, nome: string) => {
+    setApprovingId(userId)
+    try {
+      const response = await fetch('/api/approve-manual', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Erro ao aprovar pagamento')
+      }
+
+      await fetchDashboardData()
+    } catch (error) {
+      console.error('Erro ao aprovar pagamento:', error)
+      alert('Erro ao aprovar pagamento')
+    } finally {
+      setApprovingId(null)
     }
   }
 
@@ -273,7 +296,17 @@ export default function Admin() {
                         {user.pagamentos[0]?.status || 'PENDENTE'}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap flex items-center gap-2">
+                      {user.pagamentos[0]?.status === 'PENDENTE' && (
+                        <button
+                          onClick={() => handleApprove(user.id, user.nome)}
+                          disabled={approvingId === user.id}
+                          className="text-green-600 hover:text-green-800 transition-colors disabled:opacity-50"
+                          title="Aprovar pagamento"
+                        >
+                          <CheckCircle className="w-5 h-5" />
+                        </button>
+                      )}
                       <button
                         onClick={() => setDeleteConfirm({ id: user.id, nome: user.nome })}
                         className="text-red-600 hover:text-red-800 transition-colors"
